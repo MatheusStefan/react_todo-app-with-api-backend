@@ -30,16 +30,6 @@ const removeTodoById = async (id) => {
   return Todo.destroy({ where: { id } });
 };
 
-const removeTodos = async (ids) => {
-  return Todo.destroy({
-    where: {
-      id: {
-        [Op.in]: ids,
-      },
-    },
-  });
-};
-
 const updateTodo = async ({ id, title, completed }) => {
   const updateFields = {};
 
@@ -60,6 +50,5 @@ module.exports = {
   getTodoById,
   createTodo,
   removeTodoById,
-  removeTodos,
   updateTodo,
 };

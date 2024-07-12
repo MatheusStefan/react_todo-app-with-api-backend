@@ -51,28 +51,12 @@ const removeTodo = async (req, res) => {
     if (!todoToRemove) {
       return res.sendStatus(404);
     }
-    res.sendStatus(204);
+    const todos = listAllTodos();
+    
+    res.status(200).send(todos);
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
-};
-
-const removeTodos = async (req, res) => {
-  const { ids } = req.body;
-
-  if (!ids || !Array.isArray(ids) || ids.length === 0) {
-    return res.status(400).send("Valid array of todo IDs is required.");
-  }
-
-  try {
-    await todosService.removeTodos(ids);
-
-    res.sendStatus(204);
-  } catch (error) {
-    console.error("Error removing todos:", error);
-    res.status(500).send("Internal Server Error");
-  }
-
 };
 
 const updateTodo = async (req, res) => {
@@ -106,6 +90,5 @@ module.exports = {
   getTodoById,
   createTodo,
   removeTodo,
-  removeTodos,
   updateTodo,
 };
