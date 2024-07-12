@@ -53,7 +53,7 @@ const removeTodo = async (req, res) => {
     }
     const todos = listAllTodos();
     
-    res.status(200).send(todos);
+    res.status(204).send(todos);
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
